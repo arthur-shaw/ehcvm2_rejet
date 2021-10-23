@@ -2,33 +2,13 @@
 # Check that necessary objects exist
 # =============================================================================
 
-check_exists <- function(object_names) {
-    names_sought <- object_names
-    names_found <- purrr::map_lgl(
-        .x = names_sought,
-        .f = ~ exists(.x)
-    )
-    names_missing <- names_sought[!names_found]
-    if (length(names_missing) > 0) {
-        
-        missing_list <- glue::glue_collapse(
-            glue::glue("{glue::backtick(names_found)}"), 
-            sep = ", ", 
-            last = ", and "
-        )
-
-        stop(glue::glue("The following objects are missing: {missing_list}"))
-        
-    }
-}
-
 objects_needed <- c(
-    "menage",
+    "menages",
     "membres", 
     "filets_securite",
-    "equipements",
-    "calories_totales",
-    "calories_par_item"
+    "equipements"
+    # "calories_totales",
+    # "calories_par_item"
 )
 
 check_exists(objects_needed)
@@ -56,7 +36,7 @@ library(rlang)
 
 # en dehors du ménage, consommation par le ménage en entier (section 7A)
 attrib_repas_dehors_menage <- susoreview::any_vars(
-    df = menage,
+    df = menages,
     var_pattern = "s07Aq01b|s07Aq04b|s07Aq07b|s07Aq10b|s07Aq13b|s07Aq16b|s07Aq19b",
     var_val = c(1, 2, 3),
     attrib_name = "repas_dehors_menage"
@@ -64,7 +44,7 @@ attrib_repas_dehors_menage <- susoreview::any_vars(
 
 # au sein du ménage (section 7B)
 attrib_repas_a_domicile <- susoreview::any_vars(
-    df = menage,
+    df = menages,
     var_pattern = "^s07Bq02_",
     var_val = 1,
     attrib_name = "repas_a_domicile"
@@ -76,7 +56,7 @@ attrib_repas_a_domicile <- susoreview::any_vars(
 
 # fêtes
 attrib_depense_fetes <- susoreview::any_vars(
-    df = menage,
+    df = menages,
     var_pattern = "s09Aq02",
     var_val = 1,
     attrib_name = "depense_fetes"
@@ -84,7 +64,7 @@ attrib_depense_fetes <- susoreview::any_vars(
 
 # 7 jours
 attrib_depense_7d <- susoreview::any_vars(
-    df = menage,
+    df = menages,
     var_pattern = "s09Bq02",
     var_val = 1,
     attrib_name = "depense_7d"
@@ -92,7 +72,7 @@ attrib_depense_7d <- susoreview::any_vars(
 
 # 30 jours
 attrib_depense_30d <- susoreview::any_vars(
-    df = menage,
+    df = menages,
     var_pattern = "s09Cq02",
     var_val = 1,
     attrib_name = "depense_30d"
@@ -100,7 +80,7 @@ attrib_depense_30d <- susoreview::any_vars(
 
 # 3 mois
 attrib_depense_3m <- susoreview::any_vars(
-    df = menage,
+    df = menages,
     var_pattern = "s09Dq02",
     var_val = 1,
     attrib_name = "depense_3m"
@@ -108,7 +88,7 @@ attrib_depense_3m <- susoreview::any_vars(
 
 # 6 mois
 attrib_depense_6m <- susoreview::any_vars(
-    df = menage,
+    df = menages,
     var_pattern = "s09Eq02",
     var_val = 1,
     attrib_name = "depense_6m"
@@ -116,7 +96,7 @@ attrib_depense_6m <- susoreview::any_vars(
 
 # 12 mois
 attrib_depense_12m <- susoreview::any_vars(
-    df = menage,
+    df = menages,
     var_pattern = "s09Fq02",
     var_val = 1,
     attrib_name = "depense_12m"
@@ -128,7 +108,7 @@ attrib_depense_12m <- susoreview::any_vars(
 
 # nombre d'entreprises
 attrib_num_entreprises <- susoreview::count_list(
-    df = menage,
+    df = menages,
     var_pattern = "s10q12a",
     missing_val = "##N/A##",
     attrib_name = "num_entreprises"
@@ -140,7 +120,7 @@ attrib_num_entreprises <- susoreview::count_list(
 
 # entreprise localisée au domicile
 attrib_entreprise_au_domicile <- susoreview::create_attribute(
-    df = menage,
+    df = menages,
     condition = s11q17 == 1,
     attrib_name = "entreprise_au_domicile",
     attrib_vars = "s11q17"
@@ -152,7 +132,7 @@ attrib_entreprise_au_domicile <- susoreview::create_attribute(
 
 # si un transfert reçu
 attrib_recu_transfert <- susoreview::count_list(
-    df = menage,
+    df = menages,
     var_pattern = "s13q09a",
     missing_val = "##N/A##",
     attrib_name = "recu_transfert"
@@ -176,7 +156,7 @@ attrib_recu_filet <- susoreview::any_obs(
 
 # pratique l'agriculture
 attrib_pratique_agriculture <- susoreview::create_attribute(
-    df = menage,
+    df = menages,
     condition = s16Aq00 == 1,
     attrib_name = "pratique_agriculture",
     attrib_vars = "s16Aq00"
@@ -188,7 +168,7 @@ attrib_pratique_agriculture <- susoreview::create_attribute(
 
 # pratique l'élevage
 attrib_pratique_elevage <- susoreview::create_attribute(
-    df = menage,
+    df = menages,
     condition = s17q00 == 1,
     attrib_name = "pratique_elevage",
     attrib_vars = "s17q00"
@@ -200,7 +180,7 @@ attrib_pratique_elevage <- susoreview::create_attribute(
 
 # pratique la pêche
 attrib_pratique_peche <- susoreview::create_attribute(
-    df = menage,
+    df = menages,
     condition = s18q01 == 1,
     attrib_name = "pratique_peche",
     attrib_vars = "s18q01"
@@ -386,11 +366,10 @@ attrib_revenu_hors_emploi <- membres %>%
     dplyr::mutate(
         revenu = dplyr::if_any(
             .cols = c(s05q01, s05q03, s05q05, s05q07, s05q09, s05q11, s05q13),
-            .fns = .x == 1
+            .fns = ~ .x == 1
         )
     ) %>%
     susoreview::any_obs(
-        df = membres,
         where = revenu == 1,
         attrib_name = "revenu_hors_emploi",
         attrib_vars = "s05q01|s05q03|s05q05|s05q07|s05q09|s05q11|s05q13"
@@ -404,7 +383,7 @@ attrib_repas_dehors_membre <- membres %>%
     dplyr::mutate(
         repas = dplyr::if_any(
             .cols = c(s07Aq01, s07Aq04, s07Aq07, s07Aq10, s07Aq13, s07Aq16, s07Aq19),
-            .fns = .x %in% c(1, 2, 3)
+            .fns = ~ .x %in% c(1, 2, 3)
         )
     ) %>%
     susoreview::any_obs(
