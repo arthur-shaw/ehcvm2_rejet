@@ -429,33 +429,37 @@ attrib_location_equipement <- susoreview::any_obs(
 # Calories totales
 # -----------------------------------------------------------------------------
 
+# TODO: uncomment once method developed to compute calories
+
 # trop de calories
-attrib_calories_elevees <- susoreview::create_attribute(
-    df = calories_totales,
-    condition = calories > 4000,
-    attrib_name = "calories_elevees",
-    attrib_vars = "^s07Bq02_|^s07Bq03a_|^s07Bq03b_|^s07Bq03c_"
-)
+# attrib_calories_elevees <- susoreview::create_attribute(
+#     df = calories_totales,
+#     condition = calories > 4000,
+#     attrib_name = "calories_elevees",
+#     attrib_vars = "^s07Bq02_|^s07Bq03a_|^s07Bq03b_|^s07Bq03c_"
+# )
 
 # trop peu de calories
-attrib_calories_faibles <- susoreview::create_attribute(
-    df = calories_totales,
-    condition = calories <= 800,
-    attrib_name = "calories_faibles",
-    attrib_vars = "^s07Bq02_|^s07Bq03a_|^s07Bq03b_|^s07Bq03c_"
-)
+# attrib_calories_faibles <- susoreview::create_attribute(
+#     df = calories_totales,
+#     condition = calories <= 800,
+#     attrib_name = "calories_faibles",
+#     attrib_vars = "^s07Bq02_|^s07Bq03a_|^s07Bq03b_|^s07Bq03c_"
+# )
 
 # -----------------------------------------------------------------------------
 # Calories par item
 # -----------------------------------------------------------------------------
 
+# TODO: uncomment once method developed to compute calories
+
 # trop de calories déclarée pour un seul item
-attrib_calories_elevees_item <- susoreview::any_obs(
-    df = calories_par_item,
-    where = calories > 1500,
-    attrib_name = "calories_elevees_item",
-    attrib_vars = "^s07Bq03a_|^s07Bq03b_|^s07Bq03c_"
-)
+# attrib_calories_elevees_item <- susoreview::any_obs(
+#     df = calories_par_item,
+#     where = calories > 1500,
+#     attrib_name = "calories_elevees_item",
+#     attrib_vars = "^s07Bq03a_|^s07Bq03b_|^s07Bq03c_"
+# )
 
 # =============================================================================
 # Combine attributes

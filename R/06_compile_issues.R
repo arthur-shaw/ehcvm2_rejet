@@ -5,7 +5,8 @@
 # TODO: change names
 objects_needed <- c(
     "attribs",
-    "calories_par_item"
+    # "calories_par_item",
+    "suso_errors"
 )
 
 check_exists(objects_needed)
@@ -159,50 +160,50 @@ issue_calories_item_high <- susoreview::create_issue(
 )
 
 # items pour lesqules les calories sont trop élevées
-produit_codes <- c(
-    "aliment__id %in% c(1:26, 166:169)",
-    "aliment__id %in% c(27:39, 170, 171)",
-    "aliment__id %in% c(40:51, 172, 173)",
-    "aliment__id %in% c(52:60, 174)",
-    "aliment__id %in% c(61:70, 175)",
-    "aliment__id %in% c(71:87, 176)",
-    "aliment__id %in% c(88:108, 177)",
-    "aliment__id %in% c(109:133, 178)",
-    "aliment__id %in% c(134:138)",
-    "aliment__id %in% c(139:154, 179)",
-    "aliment__id %in% c(155:165, 180)"
-)
+# produit_codes <- c(
+#     "aliment__id %in% c(1:26, 166:169)",
+#     "aliment__id %in% c(27:39, 170, 171)",
+#     "aliment__id %in% c(40:51, 172, 173)",
+#     "aliment__id %in% c(52:60, 174)",
+#     "aliment__id %in% c(61:70, 175)",
+#     "aliment__id %in% c(71:87, 176)",
+#     "aliment__id %in% c(88:108, 177)",
+#     "aliment__id %in% c(109:133, 178)",
+#     "aliment__id %in% c(134:138)",
+#     "aliment__id %in% c(139:154, 179)",
+#     "aliment__id %in% c(155:165, 180)"
+# )
 
-produit_noms <- c(
-    "cereales",
-    "viandes",
-    "poissons",
-    "laitier",
-    "huiles",
-    "fruits",
-    "legumes",
-    "legtub",
-    "sucreries",
-    "epices",
-    "boissons"
-)
+# produit_noms <- c(
+#     "cereales",
+#     "viandes",
+#     "poissons",
+#     "laitier",
+#     "huiles",
+#     "fruits",
+#     "legumes",
+#     "legtub",
+#     "sucreries",
+#     "epices",
+#     "boissons"
+# )
 
-issues_where_calories_item_high <- purrr::map2_dfr(
-    .x = produit_codes,
-    .y = produit_noms,
-    .f = susoreview::make_issue_in_roster(
-        df = !!rlang::parse_quo(
-            glue::glue("dplyr::filter(calories_par_item, {.x})"),
-            rlang::global_env()
-        ),
-        where = calories > 1500,
-        roster_vars = aliment__id,
-        type = 2,
-        desc = "Calories trop élevées pour un item",
-        comment = "Calories trop élevées pour cet item",
-        issue_vars = glue::glue("s07Bq03a_{.y}")
-    )
-)
+# issues_where_calories_item_high <- purrr::map2_dfr(
+#     .x = produit_codes,
+#     .y = produit_noms,
+#     .f = susoreview::make_issue_in_roster(
+#         df = !!rlang::parse_quo(
+#             glue::glue("dplyr::filter(calories_par_item, {.x})"),
+#             rlang::global_env()
+#         ),
+#         where = calories > 1500,
+#         roster_vars = aliment__id,
+#         type = 2,
+#         desc = "Calories trop élevées pour un item",
+#         comment = "Calories trop élevées pour cet item",
+#         issue_vars = glue::glue("s07Bq03a_{.y}")
+#     )
+# )
 
 # -----------------------------------------------------------------------------
 # Revenu
