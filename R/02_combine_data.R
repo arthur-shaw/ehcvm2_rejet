@@ -113,8 +113,7 @@ combine_and_save <- function(
     # )
 
     # save to destination directory
-    file_name <- paste0(name, ".dta")
-    haven::write_dta(data = df, path = paste0(dir, file_name))
+    haven::write_dta(data = df, path = paste0(dir, name))
 
 }
 
