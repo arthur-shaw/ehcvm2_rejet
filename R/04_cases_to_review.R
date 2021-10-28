@@ -24,7 +24,8 @@ cases_to_review <- haven::read_dta(file = paste0(combined_dir, "EHCVM2_MENAGE_VA
         # toutes les visites faites
         (visite1 == 1 & visite2 == 2 & visite3 == 3)
     ) %>%
-    dplyr::select(interview__id, interview__key)
+    dplyr::mutate(interview_complete = 1) %>%
+    dplyr::select(interview__id, interview__key, interview_complete, interview__status)
 
 # =============================================================================
 # Charger les données requises
