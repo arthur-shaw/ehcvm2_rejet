@@ -327,14 +327,15 @@ rm(list = ls(pattern = "^issue_"))
 # ... if questions left unanswered
 # -----------------------------------------------------------------------------
 
-# get interview statistics
-# creates data frame with interview stats
-interviews <- cases_to_review$interview__id
-interview_stats <- purrr::map_dfr(
-        .x = interviews,
-        .f = ~ susoapi::get_interview_stats(interview_id = .x)
+# extract number of questions unanswered
+interview_stats <- suso_diagnostics %>%
+    # rename to match column names from GET /api/v1/interviews/{id}/stats
+    dplyr::rename(
+        NotAnswered = n_questions_unanswered,
+        WithComments = questions__comments,
+        Invalid = entities__errors
     ) %>%
-    dplyr::rename(interview__id = InterviewId, interview__key = InterviewKey)
+    dplyr::select(interview__id, interview__key, NotAnswered, WithComments, Invalid)
 
 # prepare number of legit missing file
 # TODO: see if any legit unanswered
@@ -348,9 +349,9 @@ issues_plus_unanswered <- susoreview::add_issue_if_unanswered(
     df_cases_to_review = cases_to_review,
     df_interview_stats = interview_stats,
     df_issues = issues,
-    n_unanswered_ok = 0
-    # ,
-    # df_legit_miss = num_legit_miss
+    n_unanswered_ok = 0,
+    issue_desc = "Questions laissés sans réponse",
+    issue_comment = glue::glue("ERREUR: L'entretien a été marqué comme achevé, mais {NotAnswered} questions ont été laissées sans réponse. Veuillez renseigner ces questions.")
 )
 
 # -----------------------------------------------------------------------------
