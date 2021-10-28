@@ -50,8 +50,14 @@ load_filtered <- function(
     
 }
 
-fichiers <- c("EHCVM2_MENAGE_VAGUE1_BFA.dta", "membres.dta", "filets_securite.dta", "equipements.dta", "interview__errors.dta")
-fichier_noms <- c("menages", "membres", "filets_securite", "equipements", "suso_errors")
+fichiers <- c(
+    "EHCVM2_MENAGE_VAGUE1_BFA.dta", "membres.dta", "filets_securite.dta", "equipements.dta", 
+    "interview__errors.dta", "interview__diagnostics.dta", "interview__comments.dta"
+)
+fichier_noms <- c(
+    "menages", "membres", "filets_securite", "equipements", 
+    "suso_errors", "suso_diagnostics", "comments"
+)
 
 purrr::walk2(
     .x = fichiers, 
