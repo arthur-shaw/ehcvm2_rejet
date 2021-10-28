@@ -403,10 +403,10 @@
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.6.3",
+      "Version": "1.6.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "3323bc1a0988d63b5c65771ba0d3935d"
+      "Hash": "60200b6aa32314ac457d3efbb5ccbd98"
     },
     "pkgbuild": {
       "Package": "pkgbuild",
@@ -515,10 +515,10 @@
     },
     "rlang": {
       "Package": "rlang",
-      "Version": "0.4.11",
+      "Version": "0.4.12",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "515f341d3affe0de9e4a7f762efb0456"
+      "Hash": "0879f5388fe6e4d56d7ef0b7ccb031e5"
     },
     "rmarkdown": {
       "Package": "rmarkdown",
@@ -599,15 +599,15 @@
       "RemoteRepo": "susoapi",
       "RemoteUsername": "arthur-shaw",
       "RemoteRef": "HEAD",
-      "RemoteSha": "04588a7c23b9ad1094f5a7e65e72643123d17eb0",
-      "Hash": "94d3a0c4d1dfa5b04f5e3bd5f5ffc5e7"
+      "RemoteSha": "d6aa05527ffefd3648bebececf89e4403e2b8bef",
+      "Hash": "1f8107bc726d58ff6c17b2a624d31e82"
     },
     "susoflows": {
       "Package": "susoflows",
       "Version": "0.0.0.9001",
       "Source": "GitHub",
-      "RemoteType": "github",
       "Remotes": "github::arthur-shaw/susoapi",
+      "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "susoflows",
       "RemoteUsername": "arthur-shaw",
