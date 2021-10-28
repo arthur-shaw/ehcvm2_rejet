@@ -1,4 +1,4 @@
-.zip
-.dta
-.xlsx
-.csv
+*.zip
+*.dta
+*.xlsx
+*.csv
