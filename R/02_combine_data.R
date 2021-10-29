@@ -33,6 +33,10 @@ library(dplyr)
 # Unpack data
 # =============================================================================
 
+# -----------------------------------------------------------------------------
+# Define function
+# -----------------------------------------------------------------------------
+
 #' Unpack zip file to a folder bearing its name
 #' 
 #' Rather than unpack a file to the directory in which the file sits,
@@ -58,6 +62,10 @@ unpack_to_dir <- function(zipfile) {
     )
 }
 
+# -----------------------------------------------------------------------------
+# Execute decompression
+# -----------------------------------------------------------------------------
+
 # obtain list of zip files
 files <- fs::dir_ls(
     path = download_dir, 
@@ -75,6 +83,10 @@ purrr::walk(
 # =============================================================================
 # Combine and save Stata data
 # =============================================================================
+
+# -----------------------------------------------------------------------------
+# Define function
+# -----------------------------------------------------------------------------
 
 #' Combine and save Stata data files
 #' 
@@ -122,6 +134,10 @@ combine_and_save <- function(
     haven::write_dta(data = df, path = paste0(dir, name))
 
 }
+
+# -----------------------------------------------------------------------------
+# Execute appending of same-named files
+# -----------------------------------------------------------------------------
 
 # obtain list of all directories of unpacked zip files
 dirs <- fs::dir_ls(
