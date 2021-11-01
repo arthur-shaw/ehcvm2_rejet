@@ -5,7 +5,7 @@
 #' Ingest all Stata files that match a pattern
 #' 
 #' @param path Character. Path where Stata files can be found.
-#' @param pattern Characetr. Regular expression that identifies Stata files in `path` directory.
+#' @param pattern Character. Regular expression that identifies Stata files in `path` directory.
 #' 
 #' @return List of data frames
 #' 
