@@ -219,7 +219,7 @@ issue_no_revenue <- susoreview::create_issue(
         "recu_transfert",
         "recu_filet",
         "pratique_agriculture",
-        "pratique_elevage`",
+        "pratique_elevage",
         "pratique_peche",
         "location_equipement"
     ),
