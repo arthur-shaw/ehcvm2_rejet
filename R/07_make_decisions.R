@@ -28,7 +28,7 @@ interviews_with_comments <- susoreview::check_for_comments(
 decisions <- susoreview::decide_action(
     df_cases_to_review = cases_to_review,
     df_issues = issues_plus_miss_and_suso,
-    issue_types_to_reject = statuses_to_reject,
+    issue_types_to_reject = issues_to_reject,
     df_has_comments = interviews_with_comments,
     df_interview_stats = interview_stats
 )

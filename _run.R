@@ -5,7 +5,17 @@
 # follow these guidelines in specifying the root folder
 # - use / instead of \ in file path
 # - be sure to put / at the end of the path
-proj_dir    <- ""
+proj_dir    <- "C:/Users/wb393438/UEMOA/ehcvm2_rejet/"
+
+# =============================================================================
+# Questionnaire whose data to review
+# =============================================================================
+
+# provide a string that uniquely identifies the questionnaire. this can be:
+# - full name
+# - sub-string
+# - regular expression
+qnr_expr <- "EHCVM 2-MENAGE"
 
 # =============================================================================
 # Program behavior parameters
@@ -18,6 +28,14 @@ proj_dir    <- ""
 # - ApprovedBySupervisor: 120
 # - ApprovedByHeadquarters: 130
 statuses_to_reject <- c(100, 120)
+
+# Provide a comma-separated list of issue types to reject
+# {susoreview} uses the following codes:
+# - 1 = Reject
+# - 2 = Comment to post
+# - 3 = Survey Solutions validation error
+# - 4 = Review
+issues_to_reject <- c(1)
 
 # Whether to reject interviews recommended for rejection
 # - If TRUE, the program will instruct the server to reject these interviews.
