@@ -76,6 +76,11 @@ to_review_issues <- to_review_ids %>%
         by = c("interview__id", "interview__key")
     )
 
+to_review_api <- susoreview::add_rejection_msgs(
+    df_to_reject = decisions[["to_review"]],
+    df_issues = issues_plus_miss_and_suso
+)
+
 # -----------------------------------------------------------------------------
 # To follow up
 # -----------------------------------------------------------------------------
