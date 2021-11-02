@@ -1,21 +1,23 @@
 # =============================================================================
-# Locate project root
+# Localisation de la racine du projet
 # =============================================================================
 
-# follow these guidelines in specifying the root folder
-# - use / instead of \ in file path
-# - be sure to put / at the end of the path
+# suivre ces consignes dans la spécification du répertoire racine
+# - utiliser / au lieu de \ dans le chemin
+# - être certain de mettre / à la fin du chemin
 proj_dir    <- ""
 
 # =============================================================================
-# Provide Survey Solutions details
+# Fournir les détails du serveur Survey Solutions
 # =============================================================================
 
+# fournir
 server      <- ""
 workspace   <- ""
 user        <- ""
 password    <- ""
 
+# enregistrer
 susoapi::set_credentials(
     server = server,
     user = user,
@@ -23,39 +25,40 @@ susoapi::set_credentials(
 )
 
 # =============================================================================
-# Questionnaire whose data to review
+# Questionnaire dont les données sont à passer en revue
 # =============================================================================
 
-# provide a string that uniquely identifies the questionnaire. this can be:
-# - full name
-# - sub-string
-# - regular expression
-qnr_expr <- "EHCVM 2-MENAGE"
+# fournir un texte qui identifie le questionanire. il peut s'agir du:
+# - nom complet
+# - sous-texte
+# - expression régulière
+qnr_expr <- ""
 
 # =============================================================================
 # Program behavior parameters
 # =============================================================================
 
-# Provide a comma-separated list of interview statuses to review.
-# See status values here: https://docs.mysurvey.solutions/headquarters/export/system-generated-export-file-anatomy/#coding_status
-# Statuses supported by this script include: 
+# Fournir une liste délimitée par virgule des statuts d'entretien à passer en revue
+# Voir les valeurs ici: https://docs.mysurvey.solutions/headquarters/export/system-generated-export-file-anatomy/#coding_status
+# Statuts admis par ce script: 
 # - Completed: 100
 # - ApprovedBySupervisor: 120
 # - ApprovedByHeadquarters: 130
 statuses_to_reject <- c(100, 120)
 
-# Provide a comma-separated list of issue types to reject
-# {susoreview} uses the following codes:
-# - 1 = Reject
-# - 2 = Comment to post
-# - 3 = Survey Solutions validation error
-# - 4 = Review
+# Fournir une liste délimitée par virgule des types de problèmes à rejeter
+# {susoreview} utilise les codes suivants:
+# - 1 = Rejeter
+# - 2 = Commenter une variable
+# - 3 = Erreur de validation de Survey Solutions
+# - 4 = Passer en revue
 issues_to_reject <- c(1)
 
-# Whether to reject interviews recommended for rejection
-# - If TRUE, the program will instruct the server to reject these interviews.
-# - If FALSE, the program will not.
-# - In either case, the interviews recommended for rejection, and the reasons why, are saved in `/output/`
+# Rejeter les entretiens automatiquement
+# - Si TRUE, le programme demande au serveur de rejeter ces entretiens.
+# - Si FALSE, le programme ne rejette pas.
+# - Dans les deux cas, les entretiens à rejeter, ainsi que les motifs de rejet,
+#   sont sauvegardés dans `/output/`
 should_reject <- TRUE
 
 # =============================================================================
