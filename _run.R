@@ -5,7 +5,7 @@
 # follow these guidelines in specifying the root folder
 # - use / instead of \ in file path
 # - be sure to put / at the end of the path
-proj_dir    <- "C:/Users/wb393438/UEMOA/ehcvm2_rejet/"
+proj_dir    <- ""
 
 # =============================================================================
 # Provide Survey Solutions details
