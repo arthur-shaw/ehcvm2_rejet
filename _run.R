@@ -8,6 +8,21 @@
 proj_dir    <- "C:/Users/wb393438/UEMOA/ehcvm2_rejet/"
 
 # =============================================================================
+# Provide Survey Solutions details
+# =============================================================================
+
+server      <- ""
+workspace   <- ""
+user        <- ""
+password    <- ""
+
+susoapi::set_credentials(
+    server = server,
+    user = user,
+    password = password
+)
+
+# =============================================================================
 # Questionnaire whose data to review
 # =============================================================================
 
@@ -48,21 +63,6 @@ should_reject <- TRUE
 # =============================================================================
 
 renv::restore()
-
-# =============================================================================
-# Provide Survey Solutions details
-# =============================================================================
-
-server      <- ""
-workspace   <- ""
-user        <- ""
-password    <- ""
-
-susoapi::set_credentials(
-    server = server,
-    user = user,
-    password = password
-)
 
 # =============================================================================
 # Confirm that inputs provided
