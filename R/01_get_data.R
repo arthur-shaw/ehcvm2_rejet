@@ -20,6 +20,7 @@ library(susoflows)
 # =============================================================================
 
 susoflows::download_matching(
+    workspace = workspace,
     matches = qnr_expr, 
     export_type = "STATA",
     path = download_dir
