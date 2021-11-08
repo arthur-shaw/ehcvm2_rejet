@@ -92,4 +92,6 @@ if (should_reject == TRUE) {
 source(paste0(script_dir, "08_execute_decisions.R"))
 }
 
+# save decisions to disk
+source(paste0(script_dir, "09_save_results.R"))
 }
