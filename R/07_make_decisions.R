@@ -60,7 +60,15 @@ to_reject_ids <- revised_decisions[["to_reject"]] %>%
     dplyr::left_join(cases_to_review, by = "interview__id")
 
 to_reject_issues <- to_reject_ids %>%
-    dplyr::left_join(issues_plus_miss_and_suso)
+    dplyr::left_join(
+        issues_plus_miss_and_suso, 
+        by = c("interview__id", "interview__key")
+    ) %>%
+    dplyr::filter(issue_type %in% c(issues_to_reject, 2)) %>%
+    dplyr::select(
+        interview__id, interview__key, interview__status,
+        dplyr::starts_with("issue_")
+    )
 
 to_reject_api <- revised_decisions[["to_reject"]]
 
@@ -74,6 +82,11 @@ to_review_issues <- to_review_ids %>%
     dplyr::left_join(
         issues_plus_miss_and_suso, 
         by = c("interview__id", "interview__key")
+    ) %>%
+    dplyr::filter(issue_type %in% c(issues_to_reject, 4)) %>%
+    dplyr::select(
+        interview__id, interview__key, interview__status,
+        dplyr::starts_with("issue_")
     )
 
 to_review_api <- susoreview::add_rejection_msgs(
