@@ -59,7 +59,7 @@ issues_to_reject <- c(1)
 # - Si FALSE, le programme ne rejette pas.
 # - Dans les deux cas, les entretiens à rejeter, ainsi que les motifs de rejet,
 #   sont sauvegardés dans `/output/`
-should_reject <- TRUE
+should_reject <- FALSE
 
 # =============================================================================
 # Load required packages from {renv} lockfile
