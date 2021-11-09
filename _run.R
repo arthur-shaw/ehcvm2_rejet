@@ -51,7 +51,7 @@ main_file_name <- "menage"
 main_file_dta <- paste0(main_file_name, ".dta")
 
 # =============================================================================
-# Program behavior parameters
+# Comportement du rejet: quels statuts et quels problèmes rejeter
 # =============================================================================
 
 # Fournir une liste délimitée par virgule des statuts d'entretien à passer en revue
