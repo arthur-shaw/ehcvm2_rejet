@@ -35,6 +35,22 @@ susoapi::set_credentials(
 qnr_expr <- ""
 
 # =============================================================================
+# Questionnaire sur Designer
+# =============================================================================
+
+# fournir la "variable du questionnaire".
+# normalement, ça doit être "menage", comme la valeur de défaut ici-bas
+# pour certains, ça a été modifié, parfois pour des raisons d'organisation interne
+# pour vérifier ou modifier, voici comment faire:
+# - se connecter à Designer
+# - ouvrir le questionnaire ménage
+# - cliquer sur paramètres
+# - copier ce qui figure dans le champs "questionnaire variable" et le coller ici-bas
+# pour des informations complémentaires, voir ici: https://docs.mysurvey.solutions/questionnaire-designer/components/questionnaire-variable/
+main_file_name <- "menage"
+main_file_dta <- paste0(main_file_name, ".dta")
+
+# =============================================================================
 # Program behavior parameters
 # =============================================================================
 

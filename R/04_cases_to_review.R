@@ -13,7 +13,7 @@ check_exists(objects_needed)
 # =============================================================================
 
 # create cases to review overall
-cases_to_review <- haven::read_dta(file = paste0(combined_dir, "menage.dta")) %>%
+cases_to_review <- haven::read_dta(file = paste0(combined_dir, main_file_dta)) %>%
     # selon le statut SuSo
     dplyr::filter(interview__status %in% statuses_to_reject) %>%
     # selon les données de l'entretien
@@ -51,7 +51,7 @@ load_filtered <- function(
 }
 
 fichiers <- c(
-    "menage.dta", "membres.dta", "filets_securite.dta", "equipements.dta", 
+    main_file_dta, "membres.dta", "filets_securite.dta", "equipements.dta", 
     "interview__errors.dta", "interview__diagnostics.dta", "interview__comments.dta"
 )
 fichier_noms <- c(
