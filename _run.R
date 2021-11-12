@@ -42,7 +42,7 @@ susoapi::set_credentials(
 )
 
 # =============================================================================
-# Questionnaire dont les données sont à passer en revue
+# Questionnaire sur Headquarters dont les données sont à passer en revue
 # =============================================================================
 
 # fournir un texte qui identifie le questionanire. il peut s'agir du:
