@@ -77,6 +77,10 @@ if (nrow(cases_to_review) == 0) {
     warning("Actuellement, il n'y a aucun entreten à valider")
 } else {
 
+# compute calories
+print("---- 04b Calculer les calories -----")
+source(paste0(script_dir, "04b_calculate_calories.R"))
+
 # compile attributes
 print("---- 05 Compilation d'attributs -----")
 source(paste0(script_dir, "05_compile_attributes.R"))

@@ -8,6 +8,23 @@
 proj_dir    <- ""
 
 # =============================================================================
+# Fichiers de référence
+# =============================================================================
+
+# calories
+nom_fichier_calories <- "calories_ehcvm2.dta" 
+
+# facteurs de conversion
+nom_fichier_facteurs <- "facteurs_ehcvm2.dta"
+facteurs_niv    <- "national" # "national" ou "strate"
+facteurs_prod_id <- ""
+facteurs_region <- NULL # si niveau national, mettre NULL
+facteurs_milieu <- NULL # si niveau national, mettre NULL
+facteurs_unite  <- ""
+facteurs_taille <- ""
+facteurs_poids  <- ""
+
+# =============================================================================
 # Fournir les détails du serveur Survey Solutions
 # =============================================================================
 
@@ -105,6 +122,50 @@ object_exists <- function(object) {
 object_exists("proj_dir")
 
 dir.exists(proj_dir)
+
+# -----------------------------------------------------------------------------
+# Reference files
+# -----------------------------------------------------------------------------
+
+# files exist
+ref_dir <- paste0(proj_dir, "data/00_resource/")
+
+check_file <- function(path) {
+    if (!file.exists(path)) {
+        file_name <- fs::path_file(path)
+        parent_folder <- fs::path_dir(path)
+        stop(glue::glue(
+            "Fichier {file_name} n'existe pas dans le répertoire escompté: ",
+            "{parent_folder}",
+            .sep = "\n"
+        ))
+    }
+}
+
+check_file(path = paste0(ref_dir, nom_fichier_calories))
+check_file(path = paste0(ref_dir, nom_fichier_facteurs))
+
+# factors file has all columns
+check_facteurs <- haven::read_dta(file = paste0(ref_dir, nom_fichier_facteurs))
+
+vars_facteurs <- c(
+    facteurs_prod_id,
+    facteurs_region,
+    facteurs_milieu,
+    facteurs_unite,
+    facteurs_taille,
+    facteurs_poids
+)
+
+if (!all(vars_facteurs %in% names(check_facteurs))) {
+    colonnes_absentes <- vars_facteurs[(!vars_facteurs %in% names(check_facteurs))]
+    colonnes_absentes_liste <- glue::glue_collapse(colonnes_absentes, sep = ", ", last = ", et ")
+    stop(glue::glue(
+        "Au moins une colonne attendue est absente de la base {nom_fichier_facteurs}",
+        "Colonnes absente : {colonnes_absentes_liste}",
+        .sep = "\n"
+    ))
+}
 
 # -----------------------------------------------------------------------------
 # Program behavior parameters
