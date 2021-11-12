@@ -214,3 +214,9 @@ food_df <- apply_val_labels(
 # remove intermediary objects
 # both to lighten the memory load and to avoid confusion over objects
 rm(food_dfs_raw, food_dfs_renamed, food_labels, food_labels_all)
+
+# save data
+haven::write_dta(
+    data = food_df,
+    path = paste0(derived_dir, "consommation_alimentaire_7d.dta")
+)
