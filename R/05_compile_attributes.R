@@ -408,8 +408,6 @@ attrib_location_equipement <- susoreview::any_obs(
 # Calories totales
 # -----------------------------------------------------------------------------
 
-# TODO: uncomment once method developed to compute calories
-
 # pourcentage de produits consommées qui ont été valorisés en calories
 attrib_p_aliments_valorises <- susoreview::create_attribute(
     df = calories_totales,
