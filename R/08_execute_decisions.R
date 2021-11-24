@@ -22,5 +22,7 @@ susoreview::post_comments(
 # implement rejection with rejection message
 purrr::pwalk(
     .l = to_reject_api,
-    .f = susoreview::reject_interview
+    .f = susoreview::reject_interview,
+    statuses_to_reject = statuses_to_reject,
+    workspace = workspace
 )
