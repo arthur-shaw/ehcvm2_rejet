@@ -170,8 +170,8 @@ calories_eclates <- purrr::map2_dfr(
     .x = eclates_depuis,
     .y = eclates_vers,
     .f = ~ reconvertir_obs(
-        df = facteurs,
-        var_id = produit_id_var_facteurs,
+        df = calories,
+        var_id = produit_id_var_calories,
         val_source = .x,
         val_cible = .y
     )
@@ -191,8 +191,8 @@ calories_nouveaux <- purrr::map2_dfr(
     .x = nouveaux_depuis,
     .y = nouveaux_vers,
     .f = ~ reconvertir_obs(
-        df = facteurs,
-        var_id = produit_id_var_facteurs,
+        df = calories,
+        var_id = produit_id_var_calories,
         val_source = .x,
         val_cible = .y
     )
