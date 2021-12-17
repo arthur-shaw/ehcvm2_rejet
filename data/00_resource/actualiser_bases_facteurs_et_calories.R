@@ -205,7 +205,7 @@ calories_nouveaux <- purrr::map2_dfr(
 # renuméroter les identifiants
 calories_renumerote <- renumeroter_aliments(
     df = calories, 
-    aliment_id = "produitID"
+    aliment_id = produit_id_var_calories
 )
 
 # -----------------------------------------------------------------------------
@@ -224,7 +224,7 @@ rm(list = ls(pattern = "^calories_"))
 
 # confirmer la présence de tous les produits
 produits <- c(1:153, 155:180)
-produits_absents <- produits[!produits %in% tbl_calories_ehcvm2$produitID]
+produits_absents <- produits[!produits %in% tbl_calories_ehcvm2[[produit_id_var_calories]]]
 if (length(produits_absents) >= 1) {
     produits_absents_liste <- glue::glue_collapse(produits_absents, sep = ", ", last = ", et ")
     warning(glue::glue(
