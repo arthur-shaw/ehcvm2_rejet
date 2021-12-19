@@ -216,7 +216,7 @@ Ceci comprend les étapes suivantes :
 
 #### Indiquer la localisation du projet
 
-For the program to run, it needs to know where it is located in your file system. To get the program oriented, provide the file path to the root of the project (i.e., directory in which `auto-sort.Rproj` is located). This path should be specified as the value of `proj_dir` (i.e., in the quotes)
+For the program to run, it needs to know where it is located in your file system. To get the program oriented, provide the file path to the root of the project (i.e., directory in which `ehcvm2_rejet.Rproj` is located). This path should be specified as the value of `proj_dir` (i.e., in the quotes)
 
 When doing so, follow the rules repeated in the code chunk below:
 

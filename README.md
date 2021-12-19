@@ -152,7 +152,8 @@ de l’EHCVM 1 avec les colonnes suivantes:
       obs:           137                          
      vars:             3                          18 Mar 2019 03:18
      size:         1,918                          
-    -------------------------------------------------------------------------------              storage   display    value
+    -------------------------------------------------------------------------------              
+                    storage display    value
     variable name   type    format     label      variable label
     -------------------------------------------------------------------------------
     produitID       int     %70.0g     l_produitID
@@ -236,7 +237,7 @@ Ces fichiers auront la même forme et un contenu modifié. En particulier:
 
 ### Fournir les paramètres du projet
 
-Ceci comprend:
+Ceci comprend les étapes suivantes :
 
 1.  Indiquer la localisation du projet
 2.  Décrire les fichiers de référence
@@ -249,7 +250,7 @@ Ceci comprend:
 
 For the program to run, it needs to know where it is located in your
 file system. To get the program oriented, provide the file path to the
-root of the project (i.e., directory in which `auto-sort.Rproj` is
+root of the project (i.e., directory in which `ehcvm2_rejet.Rproj` is
 located). This path should be specified as the value of `proj_dir`
 (i.e., in the quotes)
 
