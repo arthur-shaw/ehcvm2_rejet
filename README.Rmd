@@ -20,16 +20,18 @@ knitr::opts_chunk$set(
 
 ## Objectifs
 
-The auto-sort program reviews interviews, based on a set of rules, and determines how they should be handled:
+Ce programme de trie examine les entretiens et, en fonction d'un ensemble de règles de contrôle-qualité, détermine comment les traiter:
 
-- Approved
-- Rejected
-- Reviewed further
-- Flagged for persistent issues
+- Approuver
+- Rejeter
+- Regarder de plus près (manuellement)
+- Identifier des problèmes persistants (à voir avec le chef d'équipe/l'agent)
 
-The program then, optionally, executes those decisions by rejecting interviews on the Survey Solutions server and saving locally a compilation of interviews that require manual action (e.g., review to decide whether to reject, discuss with field staff where errors persist, etc.).
+Ce programme peut ensuite exécuter, éventuellement, ces décisions en rejetant les entretiens sur le serveur Survey Solutions et en enregistrant sur la machine de l'utilisateur une compilation d'entretiens nécessitant une action manuelle (e.g., examen pour décider de rejeter, discuter avec le personnel de terrain des erreurs persistantes, etc.)
 
 ## Installation
+
+### Pré-requis
 
 Avant de lancer ce programme pour la première fois, (re)installer les logiciels suivants:
 
@@ -41,14 +43,14 @@ Même si ces logiciels ont été déjà installés (e.g., lors d'une vague anté
 
 Veuillez lire ici-bas comment obtenir et installer ces logiciels
 
-### R {#r}
+#### R {#r}
 
 - Suivre ce [lien](https://cran.r-project.org/)
 - Cliquer sur le lien approprié pour votre système d'exploitation
 - Cliquer sur `base`
 - Télécharger et installer (e.g., [ceci](https://cran.r-project.org/bin/windows/base/R-4.1.1-win.exe) pour Windows)
 
-### RTools
+#### RTools
 
 Nécessaire pour le système d'exploitation Windows
 
@@ -59,7 +61,7 @@ Nécessaire pour le système d'exploitation Windows
 
 Ce programme permet à R de compiler des scripts C++ utilisés par certains packages (e.g., `{dplyr}`).
 
-### RStudio
+#### RStudio
 
 - Suivre ce [lien](https://www.rstudio.com/products/rstudio/)
 - Sélectionner RStudio Desktop puis Open Source Edition
@@ -216,12 +218,12 @@ Ceci comprend les étapes suivantes :
 
 #### Indiquer la localisation du projet
 
-For the program to run, it needs to know where it is located in your file system. To get the program oriented, provide the file path to the root of the project (i.e., directory in which `ehcvm2_rejet.Rproj` is located). This path should be specified as the value of `proj_dir` (i.e., in the quotes)
+Pour que le programme s'exécute, il doit savoir où il se trouve dans votre système de fichiers. Pour orienter le programme, indiquez le chemin du fichier à la racine du projet (c'est-à-dire le répertoire dans lequel se trouve `ehcvm2_rejet.Rproj`). Ce chemin doit être spécifié comme la valeur de `proj_dir` (c'est-à-dire entre guillemets)
 
-When doing so, follow the rules repeated in the code chunk below:
+Ce faisant, suivez les règles répétées dans le morceau de code ci-dessous :
 
-- Use `/` instead of `\` in file path. In R, `\` means something special.
-- Be sure to put / at the end of the path. This will help with constructing other file paths relative to the root.
+- Utiliser `/` au lieu de `\` dans les chemins. Dans R, `\` veut dire quelque chose de spécial.
+- Tâcher de mettre `/` à la fin des chemins. Ceci aidera dans la construction du chemin des fichiers relative à la racine du projet.
 
 ```{r}
 # =============================================================================
@@ -270,16 +272,16 @@ facteurs_taille <- ""
 facteurs_poids  <- ""
 ```
 
-#### Providing details for connecting to the Survey Solutions
+#### Fournir les détails du serveur Survey Solutions
 
-In order for the program to interact with your server in any way--whether that is downloading data or rejecting interviews--it needs connection details.
+Pour que le programme interagisse avec votre serveur de quelque manière que ce soit, que ce soit en téléchargeant des données ou en rejetant des interviews, il a besoin de détails de connexion.
 
-These details are as follows:
+Ces détails sont les suivants :
 
-- `server`. Full URL or the server.
-- `workspace`. Workspace name--not the display name.
-- `user`.  User name for an admin or API user authorized for the workspace above.
-- `password`. Password for that user.
+- `server`. URL complète du serveur.
+- `workspace`. Nom de l'espace de travail--pas le nom d'affichage.
+- `user`. Nom d'utilisateur pour un administrateur ou d'un utilisateur API autorisé pour l'espace de travail ci-haut.
+- `password`. Mot de passe pour cet utilisateur.
 
 ```{r}
 # =============================================================================
@@ -299,7 +301,7 @@ susoapi::set_credentials(
 )
 ```
 
-For more information on why this information is needed and how it is used, please read about Survey Solutions authentication [here](https://arthur-shaw.github.io/susoapi/articles/authentication.html)
+Pour plus d'informations sur la raison pour laquelle ces informations sont nécessaires et comment elles sont utilisées, veuillez lire sur l'authentification Survey Solutions [ici](https://arthur-shaw.github.io/susoapi/articles/authentication.html)
 
 #### Identifier le questionnaire dans Headquarters
 
@@ -335,16 +337,19 @@ main_file_name <- "menage"
 main_file_dta <- paste0(main_file_name, ".dta")
 ```
 
-#### Specifying how the program should behave
+#### Spécifier comment le programme doit se comporter
 
-The program needs to know how to act in two dimensions:
+Le programme doit savoir comment agir en trois dimensions :
 
-1. Which Survey Solutions interview statuses to consider for review
-2. Whether the program should reject any reviews recommended for rejection
+1. Quels statuts d'entretien Survey Solutions prendre en compte pour examen
+1. Quels problèmes doivent donner lieu à un rejet
+1. Si le programme doit rejeter les entretiens dont le rejet est recommandé
 
-The `statuses_to_reject` variable captures the comma-separated list of statuses subject to review. See the notes below on which interview statuses are currently allowed.
+La variable `statuses_to_reject` capture la liste séparée par des virgules des statuts soumis au contrôle. Voir les notes ci-dessous sur les statuts d'entretien actuellement autorisés.
 
-The `should_reject`variable captures whether or not interviews recommended for rejection should be automatically rejected. See the code chunk below on how the values are interpretted.
+La variable `issues_to_reject` capture la liste séparée par des virgules des problèmes qui enclenchent le rejet. Voir les notes ci-dessous concernant les types de problèmes.
+
+La variable `should_reject` indique si les entretiens recommandés pour rejet doivent ou non être automatiquement rejetés. Voir le morceau de code ci-dessous sur la façon dont les valeurs sont interprétées.
 
 ```{r}
 # =============================================================================
