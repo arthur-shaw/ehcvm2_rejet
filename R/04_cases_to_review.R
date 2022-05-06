@@ -50,8 +50,15 @@ load_filtered <- function(
     
 }
 
+# identifier le nom du fichier d'équipements
+equipement_file <- dplyr::case_when(
+    fs::file_exists(paste0(combined_dir, "equipements.dta")) ~ "equipements.dta",
+    fs::file_exists(paste0(combined_dir, "equipment.dta")) ~ "equipment.dta",
+    TRUE ~ NA_character_
+)
+
 fichiers <- c(
-    main_file_dta, "membres.dta", "filets_securite.dta", "equipements.dta", 
+    main_file_dta, "membres.dta", "filets_securite.dta", equipement_file, 
     "interview__errors.dta", "interview__diagnostics.dta", "interview__comments.dta"
 )
 fichier_noms <- c(
